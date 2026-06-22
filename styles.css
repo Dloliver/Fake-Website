@@ -35,6 +35,18 @@ footer {
   padding: 36px 0 24px;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.auth-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 h1,
 h2,
 p {

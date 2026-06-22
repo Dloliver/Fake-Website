@@ -35,9 +35,17 @@
         <h1>Demo Shop</h1>
         <p class="subhead">A simple fake storefront for testing deployments, tags, and manually-added data layer events.</p>
       </div>
-      <button class="cart-button" id="viewCartButton" type="button">
-        Cart <span id="cartCount">0</span>
-      </button>
+      <div class="header-actions">
+        <div class="auth-group">
+          <span id="userStatus" style="font-size: 0.85rem; font-weight: bold; color: var(--muted); margin-right: 8px;" hidden></span>
+          <button id="signUpButton" type="button" class="secondary-button">Sign Up</button>
+          <button id="loginButton" type="button">Login</button>
+          <button id="logoutButton" type="button" class="secondary-button" hidden>Logout</button>
+        </div>
+        <button class="cart-button" id="viewCartButton" type="button">
+          Cart <span id="cartCount">0</span>
+        </button>
+      </div>
     </header>
 
     <main>
