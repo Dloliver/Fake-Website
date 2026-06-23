@@ -84,13 +84,39 @@ function getCartItemsForDataLayer() {
   }));
 }
 
+// Helper to recursively deep clone objects and exclude properties with undefined values
+function deepCloneAndClean(obj) {
+  if (obj === null || typeof obj !== "object") {
+    return obj;
+  }
+
+  if (Array.isArray(obj)) {
+    return obj.map(item => deepCloneAndClean(item));
+  }
+
+  const clone = {};
+  for (const key in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+      const val = obj[key];
+      if (val !== undefined) {
+        clone[key] = deepCloneAndClean(val);
+      }
+    }
+  }
+  return clone;
+}
+
 // Core helper to push dataLayer events and correctly set reset/clear objects
 function pushDataLayerEvent(payload, resetKey) {
   window.dataLayer = window.dataLayer || [];
+  
+  // Clone and strip undefined fields for strict immutability and compliance
+  const cleanPayload = deepCloneAndClean(payload);
+
   if (resetKey) {
     window.dataLayer.push({ [resetKey]: undefined });
   }
-  window.dataLayer.push(payload);
+  window.dataLayer.push(cleanPayload);
   if (resetKey) {
     window.dataLayer.push({ [resetKey]: null });
   }
