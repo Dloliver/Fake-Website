@@ -36,6 +36,12 @@ const closeCartButton = document.querySelector("#closeCartButton");
 const checkoutButton = document.querySelector("#checkoutButton");
 const debugButton = document.querySelector("#debugButton");
 
+// Purchase Modal DOM Elements
+const purchaseModal = document.querySelector("#purchaseModal");
+const modalOrderId = document.querySelector("#modalOrderId");
+const modalOrderTotal = document.querySelector("#modalOrderTotal");
+const closeModalButton = document.querySelector("#closeModalButton");
+
 // Auth UI DOM Elements
 const signUpButton = document.querySelector("#signUpButton");
 const loginButton = document.querySelector("#loginButton");
@@ -427,10 +433,11 @@ function completeFakeCheckout() {
   }
 
   const orderId = `TEST-${Date.now()}`;
+  const totalValue = getCartTotal();
   const orderSummary = {
     transaction_id: orderId,
     currency: "USD",
-    value: getCartTotal(),
+    value: totalValue,
     tax: 0,
     shipping: 0,
     items: getCartItemsForTesting()
@@ -441,7 +448,11 @@ function completeFakeCheckout() {
   triggerPurchase(orderSummary);
 
   console.log("Fake purchase complete:", orderSummary);
-  alert(`Fake purchase complete. Order ID: ${orderId}`);
+
+  // Display purchase complete modal
+  modalOrderId.textContent = orderId;
+  modalOrderTotal.textContent = money(totalValue);
+  purchaseModal.hidden = false;
 
   cart.length = 0;
   renderCart();
@@ -516,6 +527,10 @@ closeCartButton.addEventListener("click", () => {
 });
 
 checkoutButton.addEventListener("click", completeFakeCheckout);
+
+closeModalButton.addEventListener("click", () => {
+  purchaseModal.hidden = true;
+});
 
 debugButton.addEventListener("click", () => {
   console.table(window.dataLayer || []);

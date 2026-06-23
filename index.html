@@ -81,6 +81,19 @@
       <p class="cart-total">Total: <strong id="cartTotal">$0.00</strong></p>
     </aside>
 
+    <div class="modal-backdrop" id="purchaseModal" hidden>
+      <div class="modal-card">
+        <div class="modal-emoji" aria-hidden="true">🎉</div>
+        <h2>Purchase Complete!</h2>
+        <p>Thank you for your order.</p>
+        <div class="modal-summary">
+          <p><strong>Order ID:</strong> <span id="modalOrderId"></span></p>
+          <p><strong>Total:</strong> <span id="modalOrderTotal"></span></p>
+        </div>
+        <button id="closeModalButton" type="button">Close</button>
+      </div>
+    </div>
+
     <footer>
       <p>Demo storefront for QA/testing only.</p>
     </footer>
