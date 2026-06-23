@@ -522,9 +522,9 @@ debugButton.addEventListener("click", () => {
 });
 
 // Initialize on load
+triggerPageView();
 renderProducts();
 renderCart();
-triggerPageView();
 
 // Expose simple helpers for manual testing in DevTools.
 window.demoStore = {
